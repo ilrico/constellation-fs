@@ -2,9 +2,9 @@
 ## Introduction
 **IPFS** [[ipfs.io](https://ipfs.io)] is a distributed file storage system. Stable, fast and easy to use, IPFS is a very promising system to store data in a distributed way.
 
-**Stellar**[[stellar.org](https://www.stellar.org)] is a decentrilized payment system. It offers the best speed/cost ratio currently available. Transaction cost is virtually zero and validation time is around 5 seconds. Stellar is run by the Stellar Development Foundation, a non-profit organization.
+**Stellar**[[stellar.org](https://www.stellar.org)] is a decentralized payment system. It offers the best speed/cost ratio currently available. Transaction cost is virtually zero and validation time is around 5 seconds. Stellar is run by the Stellar Development Foundation, a non-profit organization.
 
-**Constellation-FS** takes these two fabulous system closer to fill a slight issue with IPFS: a file is dependant on its origin node uptime, except if it has been pinned (ie copied and set outside garbage collector scope) by other nodes. 
+**Constellation-FS** takes these two mature systems closer to fill a slight issue with IPFS: a file is dependant on its origin node uptime, except if it has been pinned (ie copied and set outside garbage collector scope) by other nodes. 
 
 **Constellation-FS is an incentivation system for IPFS nodes to pin specific files, using the power of Stellar system as micropayment infrastructure.**
 
@@ -37,4 +37,4 @@ Basically if there is less offers reply than requested pinning nodes for a given
 
 **Checking**
 
-Once an offer is filled, it is expected that the IPFS Node pins the file. Gateways check at regular intervals that files are indeed still pinned by IPFS Node in the deal. If no downtime has occured, payment to IPFS Nodes are processed via Stellar. If a downtime has occurs, then the deal is broken and the gateways looks to match another offer.
+Once an offer is filled, it is expected that the IPFS Node pins the file. Gateways check at regular intervals that files are indeed still pinned by IPFS Node in the deal. If no downtime has occured, payment to IPFS Nodes are processed via Stellar. If a downtime has occured, then the deal is broken and the gateways looks to match another offer.
