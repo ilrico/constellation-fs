@@ -6,7 +6,7 @@
 
 **Constellation-FS** takes these two mature systems closer to fill a slight issue with IPFS: a file is dependant on its origin node uptime, except if it has been pinned (ie copied and set outside garbage collector scope) by other nodes. 
 
-**Constellation-FS is an incentivation system for IPFS nodes to pin specific files, using the power of Stellar system as micropayment infrastructure.**
+**Constellation-FS is an incentivation system for IPFS nodes to pin specific files, using the power of Stellar as micropayment infrastructure.**
 
 
 ## Principle
