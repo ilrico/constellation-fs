@@ -1,4 +1,5 @@
 # Constellation-FS
+
 ## Introduction
 **IPFS** [[ipfs.io](https://ipfs.io)] is a distributed file storage system. Stable, fast and easy to use, IPFS is a very promising system to store data in a distributed way.
 
@@ -39,7 +40,19 @@ Basically if there is less offers reply than requested pinning nodes for a given
 
 Once an offer is filled, it is expected that the IPFS Node pins the file. Gateways check at regular intervals that files are indeed still pinned by IPFS Node in the deal. If no downtime has occured, payment to IPFS Nodes are processed via Stellar. If a downtime has occured, then the deal is broken and the gateways looks to match another offer.
 
+
 ## Documentation
+
+
+**Gateways**
+
+Anyone can run a gateway. We'll soon open source code to setup a turn-key gateway.  
+But most users will only want to use services offered by a gateway: upload a file on IPFS without running a node, and make sure this file is pinned.  
+Today https://intrastellar.io offers this service. Users just have to create an account and credit a least XLM 1 on their wallet (it's a Stellar structural rule: wallets are only activated if they receive XLM 1).  
+Once the wallet is activated, users can upload files and bids are automatically posted according to their settings.  
+
+If you want to setup your gateway, you will need to pip install constellationfs and use the Gateway methods.
+
 
 **IPFS node owner**
 
