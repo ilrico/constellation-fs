@@ -38,3 +38,20 @@ Basically if there is less offers reply than requested pinning nodes for a given
 **Checking**
 
 Once an offer is filled, it is expected that the IPFS Node pins the file. Gateways check at regular intervals that files are indeed still pinned by IPFS Node in the deal. If no downtime has occured, payment to IPFS Nodes are processed via Stellar. If a downtime has occured, then the deal is broken and the gateways looks to match another offer.
+
+## Documentation
+
+**IPFS node owner**
+
+1. install the dependency, the beautiful Requests lib, then constellationfs itself:  
+    pip install requests  
+    pip install constallationfs  
+2. get the "daemon-like" helper  
+    wget https://github.com/ilrico/constellation-fs/master/ipfsnode_on_cfs.py  
+3. get the config file template  
+    wget https://github.com/ilrico/constellation-fs/master/constellationfs_ipfsnode_template.cfg  
+4. edit the config file (basically, add your IPFS address, a password and your Stellar wallet address  
+5. rename the config file to constellationfs_ipfsnode.cfg  
+6. run the ipfsnode_on_cfs.py (better with tmux)  
+
+
