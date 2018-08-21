@@ -42,6 +42,7 @@ def do_tasks(node):
     for file_hash in accepted_files:
         ipfs.pin_add(file_hash)
         print("{} has been pinned!".format(file_hash))
+        node.publish_pin(file_hash)
 
 def main_loop(node):
     aps = BlockingScheduler()
