@@ -56,8 +56,9 @@ If you want to setup your gateway, you will need to pip install constellationfs 
 
 **IPFS node owner**
 
-1. install the dependency, the beautiful Requests lib, then constellationfs itself:  
+1. install the dependency, the beautiful Requests lib, the IPFS python wrapper, then constellationfs itself:  
     pip install requests  
+    pip install ipfsapi  
     pip install constallationfs  
 2. get the "daemon-like" helper  
     wget https://github.com/ilrico/constellation-fs/master/ipfsnode_on_cfs.py  
