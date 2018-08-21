@@ -3,7 +3,10 @@ import datetime as dt
 import json
 import sys
 
+import ipfsapi
 from constellationfs.ipfsnode import IPFSNode
+
+ipfs = ipfsapi.connect('127.0.0.1', 5001)
 
 FILE = 'constellationfs_ipfsnode.cfg'
 
@@ -35,7 +38,10 @@ def main(action):
 
 def do_tasks(node):
     node.hit_bids(verbose=True)
-    node.accept_deals()
+    accepted_files = node.accept_deals()
+    for file_hash in accepted_files:
+        ipfs.pin_add(file_hash)
+        print("{} has been pinned!".format(file_hash))
 
 def main_loop(node):
     aps = BlockingScheduler()
