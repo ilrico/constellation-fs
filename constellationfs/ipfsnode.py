@@ -14,7 +14,7 @@ class IPFSNode:
         self.cfs_password = hashlib.sha3_256(config.get('CFS_PASSWORD', '').encode('ascii')).hexdigest()
         self.api_version = config.get('API_VERSION', 1)
         self.stellar_address = config.get('STELLAR_ADDRESS')
-        self.book_scan_interval = int(config.get('BOOK_SCAN_INTERVAL'))
+        self.book_scan_interval = int(config.get('BOOK_SCAN_INTERVAL', 10))
         self.offer_limit = int(config.get('OFFER_LIMIT', 10000000))
         self.size_mb_max = int(config.get('FILESIZE_MB_MAX', 10000000))
         self.days_max = int(config.get('DAYS_MAX', 10))
@@ -43,7 +43,7 @@ class IPFSNode:
             result.error_msg = f'[ERROR] {r.status_code}'
         return result.process()
 
-    def list_bids(self, size_mb_max=0, days_max=10, offer_limit=0):
+    def list_bids(self):
         result = Result()
         url = f'https://constellation-fs.org/api/cfs/v{self.api_version}/book/bids'
         data = {'IPFS_ADDRESS': self.ipfs_address,
@@ -58,6 +58,21 @@ class IPFSNode:
             result.error_msg = f'[ERROR] {r.status_code}'
         return result.process()
 
+    def hit_bids(self, verbose=False):
+        result = Result()
+        r_list_bids = self.list_bids()
+        if r_list_bids.ok:
+            bid_counter = 0
+            print(r_list_bids.data)
+            bid_uuids = [bid['uuid'] for bid in r_list_bids.data]
+            for bid_uuid in bid_uuids:
+                r = self.place_offer(bid_uuid)
+                if verbose:
+                    print('  {}'.format(r.msg))
+            result.success_msg = "{} offer(s) sent".format(bid_counter)
+        else:
+            result = r_list_bids
+        return result.process()
 
     def place_offer(self, bid_uuid):
         result = Result()
@@ -77,7 +92,7 @@ class IPFSNode:
 
     def accept_deals(self):
         result = Result()
-        url = f'https://constellation-fs.org/api/cfs/v{self.api_version}/book/deal/accept'
+        url = f'https://constellation-fs.org/api/cfs/v{self.api_version}/deal/accept'
         data = {'IPFS_ADDRESS': self.ipfs_address,
                 'PWD': self.cfs_password,
                 'STELLAR_ADDRESS': self.stellar_address}
@@ -87,3 +102,17 @@ class IPFSNode:
         else:
             result.error_msg = f'[ERROR] {r.status_code}'
         return result.process()
+
+    def declare_pin(self, file_hash):
+        result = Result
+        url = f'https://constellation-fs.org/api/cfs/v{self.api_version}/deal/pin/declare'
+        data = {'IPFS_ADDRESS': self.ipfs_address,
+                'PWD': self.cfs_password,
+                'FILE_HASH': file_hash}
+        r = requests.post(url, data=data)
+        if r.status_code == 200:
+            result.load_from_dict(r.json())
+        else:
+            result.error_msg = f'[ERROR] {r.status_code}'
+        return result.process()
+
